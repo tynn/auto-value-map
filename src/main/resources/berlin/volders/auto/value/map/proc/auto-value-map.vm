@@ -1,0 +1,105 @@
+#if (!$packageName.empty)
+package $packageName;
+#end
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+#if ($isFinal)final #else abstract #end class $className$typeParameters extends $classToExtend$typeParameters {
+
+    ## Map delegate
+
+    private final Map<String, Object> map;
+
+    $className(
+
+#foreach ($p in $properties)
+
+            ${p.nullable}$p.type $p.name #if ($foreach.hasNext) , #end
+#end ) {
+
+        super(#foreach ($p in $properties) $p.name #if ($foreach.hasNext) , #end #end );
+
+        HashMap<String, Object> map = new HashMap<>();
+
+#foreach ($p in $properties)
+
+    #if (!$p.nullable.empty)
+
+        if ($p.value != null) {
+            map.put("$p.key", $p.value);
+        }
+    #else
+
+        map.put("$p.key", $p.value);
+    #end
+#end
+
+        this.map = Collections.unmodifiableMap(map);
+    }
+
+    ## Map
+
+    @Override
+    public int size() {
+        return map.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return map.isEmpty();
+    }
+
+    @Override
+    public boolean containsKey(Object o) {
+        return map.containsKey(o);
+    }
+
+    @Override
+    public boolean containsValue(Object o) {
+        return map.containsValue(0);
+    }
+
+    @Override
+    public Object get(Object o) {
+        return map.get(o);
+    }
+
+    @Override
+    public Object put(String s, Object o) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Object remove(Object o) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void putAll(Map<? extends String, ?> map) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<String> keySet() {
+        return map.keySet();
+    }
+
+    @Override
+    public Collection<Object> values() {
+        return map.values();
+    }
+
+    @Override
+    public Set<Map.Entry<String, Object>> entrySet() {
+        return map.entrySet();
+    }
+}
