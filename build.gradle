@@ -10,6 +10,5 @@ targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
     compile 'com.google.auto.value:auto-value:1.3'
-    compile 'com.google.auto:auto-common:0.6'
     testCompile 'junit:junit:4.12'
 }

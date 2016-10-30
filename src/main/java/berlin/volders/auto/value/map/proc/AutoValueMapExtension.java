@@ -16,31 +16,32 @@
 
 package berlin.volders.auto.value.map.proc;
 
-import berlin.volders.auto.value.map.Key;
 import com.google.auto.value.extension.AutoValueExtension;
 import com.google.auto.value.processor.escapevelocity.Template;
-import com.google.common.collect.ImmutableSet;
 
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.AnnotationValue;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.google.auto.common.MoreElements.getLocalAndInheritedMethods;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
+
+import berlin.volders.auto.value.map.Key;
 
 @SuppressWarnings("unused")
 public final class AutoValueMapExtension extends AutoValueExtension {
@@ -66,12 +67,12 @@ public final class AutoValueMapExtension extends AutoValueExtension {
         TypeElement mapType = elements.getTypeElement(Map.class.getName());
         HashSet<ExecutableElement> methods = new HashSet<>();
         // the map interface defines equals, hashCode and default methods; ignore these
-        for (ExecutableElement method : getLocalAndInheritedMethods(mapType, elements)) {
-            if (consumeMethod(method)) {
-                methods.add(method);
+        for (Element element : mapType.getEnclosedElements()) {
+            if (element instanceof ExecutableElement && consumeMethod((ExecutableElement) element)) {
+                methods.add((ExecutableElement) element);
             }
         }
-        return ImmutableSet.copyOf(methods);
+        return Collections.unmodifiableSet(methods);
     }
 
     private static boolean consumeMethod(ExecutableElement method) {
