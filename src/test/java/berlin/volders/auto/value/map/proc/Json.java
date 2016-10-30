@@ -16,30 +16,13 @@
 
 package berlin.volders.auto.value.map.proc;
 
-import berlin.volders.auto.value.map.Key;
-import com.google.auto.value.AutoValue;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.Map;
-import java.util.Set;
-
-@AutoValue
-abstract class TestAutoMap<T> implements Map<String, Object> {
-
-    abstract String key1();
-
-    @Nullable
-    abstract Integer key2();
-
-    abstract int key3();
-
-    abstract T key4();
-
-    @Key("key_5")
-    abstract Set<String> key5();
-
-    @SerializedName("key_6")
-    abstract boolean key6();
-
-    @Json(name = "key_7")
-    abstract int key7();
+@Retention(RetentionPolicy.SOURCE)
+@Target({ElementType.METHOD})
+@interface Json {
+    String name();
 }

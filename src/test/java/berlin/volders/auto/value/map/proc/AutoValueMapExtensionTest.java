@@ -35,6 +35,7 @@ public class AutoValueMapExtensionTest {
     final CharSequence key4 = "key4";
     final Set<String> key5 = Collections.singleton("key5");
     final boolean key6 = true;
+    final int key7 = 7;
 
     @Test
     public void map_containing_all_keys() throws Exception {
@@ -52,12 +53,14 @@ public class AutoValueMapExtensionTest {
         assertEquals("map value for key_5", key5, actual.get("key_5"));
         assertTrue("map containing key_6", actual.containsKey("key_6"));
         assertEquals("map value for key_6", key6, actual.get("key_6"));
+        assertTrue("map containing key_7", actual.containsKey("key_7"));
+        assertEquals("map value for key_7", key7, actual.get("key_7"));
     }
 
     @Test
     public void map_not_containing_optional_key() throws Exception {
         TestAutoMap<CharSequence> actual =
-                new AutoValue_TestAutoMap<>(key1, null, key3, key4, key5, key6);
+                new AutoValue_TestAutoMap<>(key1, null, key3, key4, key5, key6, key7);
 
         assertTrue("map containing key1", actual.containsKey("key1"));
         assertEquals("map value for key1", key1, actual.get("key1"));
@@ -71,13 +74,15 @@ public class AutoValueMapExtensionTest {
         assertEquals("map value for key_5", key5, actual.get("key_5"));
         assertTrue("map containing key_6", actual.containsKey("key_6"));
         assertEquals("map value for key_6", key6, actual.get("key_6"));
+        assertTrue("map containing key_7", actual.containsKey("key_7"));
+        assertEquals("map value for key_7", key7, actual.get("key_7"));
     }
 
     @Test
     public void map_not_containing_any_other_key() throws Exception {
         TestAutoMap<CharSequence> actual = setupTestAutoMap();
         Set<String> expected = new HashSet<>(Arrays.asList(
-                "key1", "key2", "key3", "key4", "key_5", "key_6"));
+                "key1", "key2", "key3", "key4", "key_5", "key_6", "key_7"));
 
         assertEquals("map not containing other key", expected, actual.keySet());
     }
@@ -107,6 +112,6 @@ public class AutoValueMapExtensionTest {
     }
 
     private TestAutoMap<CharSequence> setupTestAutoMap() {
-        return new AutoValue_TestAutoMap<>(key1, key2, key3, key4, key5, key6);
+        return new AutoValue_TestAutoMap<>(key1, key2, key3, key4, key5, key6, key7);
     }
 }

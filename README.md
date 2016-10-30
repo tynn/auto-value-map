@@ -16,7 +16,7 @@ implementing `Map<String, Object>`.
     }
 
 To use a different value than the property name as key, annotate the abstract
-method with `@Key` or any annotation named `@SerializedName`.
+method with `@Key` or any annotation named `@SerializedName` or `@Json`.
 
 ## Installation
 
