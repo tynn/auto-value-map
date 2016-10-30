@@ -17,7 +17,6 @@
 package berlin.volders.auto.value.map.proc;
 
 import berlin.volders.auto.value.map.Key;
-import com.google.auto.service.AutoService;
 import com.google.auto.value.extension.AutoValueExtension;
 import com.google.auto.value.processor.escapevelocity.Template;
 import com.google.common.collect.ImmutableSet;
@@ -43,7 +42,6 @@ import java.util.Set;
 
 import static com.google.auto.common.MoreElements.getLocalAndInheritedMethods;
 
-@AutoService(AutoValueExtension.class)
 @SuppressWarnings("unused")
 public final class AutoValueMapExtension extends AutoValueExtension {
 
