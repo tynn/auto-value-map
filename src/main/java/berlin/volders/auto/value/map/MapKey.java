@@ -16,6 +16,7 @@
 
 package berlin.volders.auto.value.map;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,11 +25,12 @@ import java.lang.annotation.Target;
 /**
  * Define a different map key for the property.
  */
+@Documented
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD})
-public @interface Key {
+public @interface MapKey {
     /**
-     * @return the key for the property
+     * @return the map key for the property
      */
     String value();
 }

@@ -16,6 +16,7 @@
 
 package berlin.volders.auto.value.map.proc;
 
+import berlin.volders.auto.value.map.MapKey;
 import com.google.auto.value.extension.AutoValueExtension;
 import com.google.auto.value.processor.escapevelocity.Template;
 
@@ -40,8 +41,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
-
-import berlin.volders.auto.value.map.Key;
 
 @SuppressWarnings("unused")
 public final class AutoValueMapExtension extends AutoValueExtension {
@@ -159,8 +158,8 @@ public final class AutoValueMapExtension extends AutoValueExtension {
                     break;
             }
         }
-        Key key = value.getAnnotation(Key.class);
-        return key == null ? property : property.setKey(key.value());
+        MapKey mapKey = value.getAnnotation(MapKey.class);
+        return mapKey == null ? property : property.setKey(mapKey.value());
     }
 
     private static String getAnnotationValue(AnnotationMirror annotation, String name) {

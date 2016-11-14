@@ -16,7 +16,7 @@
 
 package berlin.volders.auto.value.map.proc;
 
-import berlin.volders.auto.value.map.Key;
+import berlin.volders.auto.value.map.MapKey;
 import com.google.auto.value.AutoValue;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ abstract class TestAutoMap<T> implements Map<String, Object> {
 
     abstract T key4();
 
-    @Key("key_5")
+    @MapKey("key_5")
     abstract Set<String> key5();
 
     @SerializedName("key_6")

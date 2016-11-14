@@ -11,12 +11,12 @@ implementing `Map<String, Object>`.
 
     @AutoValue
     public abstract class Foo implements Map<String, Object> {
-        @Key("baz")
+        @MapKey("baz")
         public abstract String bar();
     }
 
 To use a different value than the property name as key, annotate the abstract
-method with `@Key` or any annotation named `@SerializedName` or `@Json`.
+method with `@MapKey` or any annotation named `@SerializedName` or `@Json`.
 
 ## Installation
 
