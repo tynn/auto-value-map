@@ -48,8 +48,8 @@ This `AutoValueExtension` consumes all `entrySet()`, `isEmpty()`, `keySet()`,
     limitations under the License.
 
 
-  [1]: https://travis-ci.org/vertragswecker/auto-value-map.svg?branch=master
-  [2]: https://travis-ci.org/vertragswecker/auto-value-map
+  [1]: https://travis-ci.org/volders/auto-value-map.svg?branch=master
+  [2]: https://travis-ci.org/volders/auto-value-map
   [3]: https://jitpack.io/v/berlin.volders/auto-value-map.svg
   [4]: https://jitpack.io/#berlin.volders/auto-value-map
   [5]: https://github.com/google/auto
