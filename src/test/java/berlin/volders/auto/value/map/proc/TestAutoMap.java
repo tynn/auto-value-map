@@ -16,11 +16,12 @@
 
 package berlin.volders.auto.value.map.proc;
 
-import berlin.volders.auto.value.map.MapKey;
 import com.google.auto.value.AutoValue;
 
 import java.util.Map;
 import java.util.Set;
+
+import berlin.volders.auto.value.map.MapKey;
 
 @AutoValue
 abstract class TestAutoMap<T> implements Map<String, Object> {
@@ -42,4 +43,9 @@ abstract class TestAutoMap<T> implements Map<String, Object> {
 
     @Json(name = "key_7")
     abstract int key7();
+
+    @MapKey
+    @SerializedName("key_8")
+    @Json(name = "key_8")
+    abstract int key8();
 }

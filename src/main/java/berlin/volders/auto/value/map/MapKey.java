@@ -32,5 +32,5 @@ public @interface MapKey {
     /**
      * @return the map key for the property
      */
-    String value();
+    String value() default "";
 }

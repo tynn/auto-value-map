@@ -16,7 +16,6 @@
 
 package berlin.volders.auto.value.map.proc;
 
-import berlin.volders.auto.value.map.MapKey;
 import com.google.auto.value.extension.AutoValueExtension;
 import com.google.auto.value.processor.escapevelocity.Template;
 
@@ -41,6 +40,8 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
+
+import berlin.volders.auto.value.map.MapKey;
 
 @SuppressWarnings("unused")
 public final class AutoValueMapExtension extends AutoValueExtension {
@@ -137,13 +138,14 @@ public final class AutoValueMapExtension extends AutoValueExtension {
     }
 
     private static Property.Builder addAnnotatedFeatures(ExecutableElement value, Property.Builder property) {
+        String key = null;
         for (AnnotationMirror annotation : value.getAnnotationMirrors()) {
             String name = annotation.getAnnotationType().asElement().getSimpleName().toString();
             switch (name) {
                 case "Json":
                     name = getAnnotationValue(annotation, "name");
                     if (name != null) {
-                        property.setKey(name);
+                        key = name.trim();
                     }
                     break;
                 case "Nullable":
@@ -153,13 +155,19 @@ public final class AutoValueMapExtension extends AutoValueExtension {
                 case "SerializedName":
                     name = getAnnotationValue(annotation, "value");
                     if (name != null) {
-                        property.setKey(name);
+                        key = name.trim();
                     }
                     break;
             }
         }
         MapKey mapKey = value.getAnnotation(MapKey.class);
-        return mapKey == null ? property : property.setKey(mapKey.value());
+        if (mapKey != null) {
+            key = mapKey.value().trim();
+        }
+        if (key == null || key.isEmpty()) {
+            return property;
+        }
+        return property.setKey(key);
     }
 
     private static String getAnnotationValue(AnnotationMirror annotation, String name) {
