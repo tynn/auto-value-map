@@ -140,20 +140,21 @@ public final class AutoValueMapExtension extends AutoValueExtension {
     private static Property.Builder addAnnotatedFeatures(ExecutableElement value, Property.Builder property) {
         String key = null;
         for (AnnotationMirror annotation : value.getAnnotationMirrors()) {
+            String valueName = null;
             String name = annotation.getAnnotationType().asElement().getSimpleName().toString();
             switch (name) {
-                case "Json":
-                    name = getAnnotationValue(annotation, "name");
-                    if (name != null) {
-                        key = name.trim();
-                    }
-                    break;
                 case "Nullable":
                     name = annotation.getAnnotationType().asElement().toString();
                     property.setNullable('@' + name + ' ');
                     break;
+                case "Json":
+                    valueName = "name";
+                case "Field":
+                case "Header":
+                case "Part":
+                case "Query":
                 case "SerializedName":
-                    name = getAnnotationValue(annotation, "value");
+                    name = getAnnotationValue(annotation, valueName);
                     if (name != null) {
                         key = name.trim();
                     }
@@ -171,6 +172,9 @@ public final class AutoValueMapExtension extends AutoValueExtension {
     }
 
     private static String getAnnotationValue(AnnotationMirror annotation, String name) {
+        if (name == null) {
+            name = "value";
+        }
         for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> value :
                 annotation.getElementValues().entrySet()) {
             if (name.equals(value.getKey().getSimpleName().toString())) {

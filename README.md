@@ -15,8 +15,10 @@ implementing `Map<String, Object>`.
         public abstract String bar();
     }
 
-To use a different value than the property name as key, annotate the abstract
-method with `@MapKey` or any annotation named `@SerializedName` or `@Json`.
+To use a different name than the property name as key, annotate the abstract
+method with `@MapKey` or any annotation with value `@Json.name()` or named
+`@SerializedName`, `Field`, `Header`, `Part` or `Query`. An empty key will
+default to the original property name.
 
 ## Installation
 

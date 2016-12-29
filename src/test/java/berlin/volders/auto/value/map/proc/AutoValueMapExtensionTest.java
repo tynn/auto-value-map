@@ -37,59 +37,45 @@ public class AutoValueMapExtensionTest {
     final boolean key6 = true;
     final int key7 = 7;
     final int key8 = 8;
+    final int key9 = 9;
+    final int keya = 10;
+    final int keyb = 11;
+    final int keyc = 12;
 
     @Test
-    public void map_containing_all_keys() throws Exception {
+    public void map_containing_all_key_values() throws Exception {
         TestAutoMap<CharSequence> actual = setupTestAutoMap();
 
-        assertTrue("map containing key1", actual.containsKey("key1"));
-        assertEquals("map value for key1", key1, actual.get("key1"));
-        assertTrue("map containing key2", actual.containsKey("key2"));
-        assertEquals("map value for key2", key2, actual.get("key2"));
-        assertTrue("map containing key3", actual.containsKey("key3"));
-        assertEquals("map value for key3", key3, actual.get("key3"));
-        assertTrue("map containing key4", actual.containsKey("key4"));
-        assertEquals("map value for key4", key4, actual.get("key4"));
-        assertTrue("map containing key_5", actual.containsKey("key_5"));
-        assertEquals("map value for key_5", key5, actual.get("key_5"));
-        assertTrue("map containing key_6", actual.containsKey("key_6"));
-        assertEquals("map value for key_6", key6, actual.get("key_6"));
-        assertTrue("map containing key_7", actual.containsKey("key_7"));
-        assertEquals("map value for key_7", key7, actual.get("key_7"));
-        assertTrue("map containing key8", actual.containsKey("key8"));
-        assertEquals("map value for key8", key8, actual.get("key8"));
+        assertKeyValue(actual, "key1", key1);
+        assertKeyValue(actual, "key2", key2);
+        assertKeyValue(actual, "key3", key3);
+        assertKeyValue(actual, "key4", key4);
+        assertKeyValue(actual, "key_5", key5);
+        assertKeyValue(actual, "key_6", key6);
+        assertKeyValue(actual, "key_7", key7);
+        assertKeyValue(actual, "key8", key8);
+        assertKeyValue(actual, "key_9", key9);
+        assertKeyValue(actual, "key_a", keya);
+        assertKeyValue(actual, "key_b", keyb);
+        assertKeyValue(actual, "key_c", keyc);
     }
 
     @Test
     public void map_not_containing_optional_key() throws Exception {
-        TestAutoMap<CharSequence> actual =
-                new AutoValue_TestAutoMap<>(key1, null, key3, key4, key5, key6, key7, key8);
+        TestAutoMap<CharSequence> actual = new AutoValue_TestAutoMap<>(key1, null,
+                key3, key4, key5, key6, key7, key8, key9, keya, keyb, keyc);
 
-        assertTrue("map containing key1", actual.containsKey("key1"));
-        assertEquals("map value for key1", key1, actual.get("key1"));
-        assertFalse("map not containing key2", actual.containsKey("key2"));
-        assertEquals("map value for key3", null, actual.get("key2"));
-        assertTrue("map containing key3", actual.containsKey("key3"));
-        assertEquals("map value for key3", key3, actual.get("key3"));
-        assertTrue("map containing key4", actual.containsKey("key4"));
-        assertEquals("map value for key4", key4, actual.get("key4"));
-        assertTrue("map containing key_5", actual.containsKey("key_5"));
-        assertEquals("map value for key_5", key5, actual.get("key_5"));
-        assertTrue("map containing key_6", actual.containsKey("key_6"));
-        assertEquals("map value for key_6", key6, actual.get("key_6"));
-        assertTrue("map containing key_7", actual.containsKey("key_7"));
-        assertEquals("map value for key_7", key7, actual.get("key_7"));
-        assertTrue("map containing key8", actual.containsKey("key8"));
-        assertEquals("map value for key8", key8, actual.get("key8"));
+        assertNoKey(actual, "key2");
     }
 
     @Test
     public void map_not_containing_any_other_key() throws Exception {
         TestAutoMap<CharSequence> actual = setupTestAutoMap();
         Set<String> expected = new HashSet<>(Arrays.asList(
-                "key1", "key2", "key3", "key4", "key_5", "key_6", "key_7", "key8"));
+                "key1", "key2", "key3", "key4", "key_5", "key_6", "key_7", "key8", "key_9",
+                "key_a", "key_b", "key_c"));
 
-        assertEquals("map not containing other key", expected, actual.keySet());
+        assertTrue("map not containing other key", expected.containsAll(actual.keySet()));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -116,7 +102,17 @@ public class AutoValueMapExtensionTest {
         actual.clear();
     }
 
-    private TestAutoMap<CharSequence> setupTestAutoMap() {
-        return new AutoValue_TestAutoMap<>(key1, key2, key3, key4, key5, key6, key7, key8);
+    void assertNoKey(TestAutoMap<CharSequence> actual, String key) {
+        assertFalse("map not containing " + key, actual.containsKey(key));
+    }
+
+    void assertKeyValue(TestAutoMap<CharSequence> actual, String key, Object value) {
+        assertTrue("map containing " + key, actual.containsKey(key));
+        assertEquals("map value for " + key, value, actual.get(key));
+    }
+
+    TestAutoMap<CharSequence> setupTestAutoMap() {
+        return new AutoValue_TestAutoMap<>(key1, key2, key3, key4, key5, key6, key7, key8, key9,
+                keya, keyb, keyc);
     }
 }

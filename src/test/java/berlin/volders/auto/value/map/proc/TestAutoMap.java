@@ -48,4 +48,16 @@ abstract class TestAutoMap<T> implements Map<String, Object> {
     @SerializedName("key_8")
     @Json(name = "key_8")
     abstract int key8();
+
+    @Field("key_9")
+    abstract int key9();
+
+    @Header("key_a")
+    abstract int keya();
+
+    @Part("key_b")
+    abstract int keyb();
+
+    @Query("key_c")
+    abstract int keyc();
 }
