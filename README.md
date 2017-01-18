@@ -1,7 +1,7 @@
-# auto-value-map [![Build Status][1]][2] [![Release][3]][4]
+# auto-value-map [![Build][1]][2] [![Release][3]][4] [![Arsenal][5]][6]
 ###### *Type-safe immutable generated value-type maps*
 
-An [`AutoValue`][5] extension that generates a wrapper implementation for the
+An [`AutoValue`][auto] extension that generates a wrapper implementation for the
 `Map<String, Object>` interface exposing all non-null properties.
 
 ## Usage
@@ -17,12 +17,12 @@ implementing `Map<String, Object>`.
 
 To use a different name than the property name as key, annotate the abstract
 method with `@MapKey` or any annotation with value `@Json.name()` or named
-`@SerializedName`, `Field`, `Header`, `Part` or `Query`. An empty key will
+`@SerializedName`, `@Field`, `@Header`, `@Part` or `@Query`. An empty key will
 default to the original property name.
 
 ## Installation
 
-Add a *auto-value-map* dependency to the [`apt`][6] and `provided` or
+Add a *auto-value-map* dependency to the [`apt`][apt] and `provided` or
 `compileOnly` configurations.
 
     apt "berlin.volders:auto-value-map:$autoValueMapVersion"
@@ -54,5 +54,7 @@ This `AutoValueExtension` consumes all `entrySet()`, `isEmpty()`, `keySet()`,
   [2]: https://travis-ci.org/volders/auto-value-map
   [3]: https://jitpack.io/v/berlin.volders/auto-value-map.svg
   [4]: https://jitpack.io/#berlin.volders/auto-value-map
-  [5]: https://github.com/google/auto
-  [6]: https://bitbucket.org/hvisser/android-apt
+  [5]: https://img.shields.io/badge/Android%20Arsenal-auto--value--map-blue.svg
+  [6]: https://android-arsenal.com/details/1/5068
+  [auto]: https://github.com/google/auto
+  [apt]: https://bitbucket.org/hvisser/android-apt
