@@ -1,8 +1,10 @@
-# auto-value-map [![Build][1]][2] [![Release][3]][4] [![Arsenal][5]][6]
+# AutoValue: Map Extension
+[![Build][1]][2] [![Release][3]][4] [![Arsenal][5]][6]
 ###### *Type-safe immutable generated value-type maps*
 
-An [`AutoValue`][auto] extension that generates a wrapper implementation for the
-`Map<String, Object>` interface exposing all non-null properties.
+An [`AutoValue`][auto] extension that generates a wrapper implementation for
+the `Map<String, Object>` interface, exposing all non-null properties.
+
 
 ## Usage
 
@@ -20,18 +22,24 @@ method with `@MapKey` or any annotation with value `@Json.name()` or named
 `@SerializedName`, `@Field`, `@Header`, `@Part` or `@Query`. An empty key will
 default to the original property name.
 
+
 ## Installation
 
-Add a *auto-value-map* dependency to the [`apt`][apt] and `provided` or
-`compileOnly` configurations.
+Add a *auto-value* and *auto-value-map* dependency to the [`apt`][apt] and
+the annotations with *auto-value-map-no-proc* to the `provided` or
+`compileOnly` configuration.
+
+    apt "com.google.auto.value:auto-value:$autoValueVersion"
 
     apt "berlin.volders:auto-value-map:$autoValueMapVersion"
-    provided "berlin.volders:auto-value-map:$autoValueMapVersion"
+    provided "berlin.volders:auto-value-map:$autoValueMapVersion:no-proc"
+
 
 ## Limitations
 
 This `AutoValueExtension` consumes all `entrySet()`, `isEmpty()`, `keySet()`,
 `size()` and `values()` methods and thus such properties cannot be used.
+
 
 ## License
 

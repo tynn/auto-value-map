@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * Define a different map key for the property.
  */
 @Documented
-@Target(ElementType.METHOD)
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.SOURCE)
 public @interface MapKey {
     /**

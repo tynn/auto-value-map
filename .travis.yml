@@ -1,12 +1,19 @@
 language: java
-root: false
 jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
 
+git:
+  depth: 3
+
+branches:
+  only:
+    - master
+    - dev
+
 before_install:
-  - gradle :wrapper --configure-on-demand
+  - gradle wrapper -b wrapper.gradle
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
