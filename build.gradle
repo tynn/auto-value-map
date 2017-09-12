@@ -10,7 +10,7 @@ configurations.testCompile.extendsFrom configurations.compileOnly
 conf2ScopeMappings.addMapping 300, configurations.compileOnly, 'provided'
 
 dependencies {
-    compileOnly 'com.google.auto.value:auto-value:1.3'
+    compileOnly 'com.google.auto.value:auto-value:1.5'
     testCompile 'junit:junit:4.12'
 }
 
